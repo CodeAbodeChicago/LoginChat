@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Chat App w/ Socket.io</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link href="./css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+	<div id="login-wrap">
+
+		<div id="login-modal">
+			<form id="login-form" class="pure-form" autocomplete="off">
+				<h1>SIGN IN TO CHAT</h1>
+				<img class="avatar" src="images/15.jpg">
+	       		<input type="username" name="username" placeholder="username">
+				<button type="submit" class="pure-button pure-button-primary">join</button>
+				<div class="error">*some error!</div>
+			</form>
+		</div>
+
+	</div>
+
+
+	<div id="wrap">
+
+		<!-- Sidebar of all users -->
+		<div id="users-wrap">
+			<h1>USERS</h1>
+			<ul class="user-list"></ul>
+		</div><!--
+				
+		--><div id="msg-wrap">
+
+			<!-- Message template -->
+			<div class="msg-template" style="visibility:hidden">
+				<div class="left-column">
+					<img class="profile" src="images/15.jpg">
+				</div><!--
+				--><div class="right-column">
+					<div class="meta">
+						<span class="username">Bruce</span>
+						<span class="time">10:10am</span>
+					</div>
+					<div class="msg">
+						Get off the computer and go outside!!!
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Form for submitting messages -->
+			<form id="msg-form" class="pure-form" autocomplete="off">
+				<input type="text" name="new-msg"><!--
+				--><button type="submit" class="pure-button pure-button-primary"><i class="fa fa-paper-plane-o"></i></button>
+			</form>
+
+		</div>
+
+		
+	</div>
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="./js/moment.js"></script>
+	<script src="./js/login.js"></script>
+	<script src="./js/main.js"></script>
+</body>
+</html>

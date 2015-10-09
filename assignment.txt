@@ -1,0 +1,43 @@
+BASIC CHAT
+==========
+
+We are going to create a simple chat app!  When a user (e.g. a client) opens up the app, they will be prompted for a username.  Then they will join the chat and be able to send & receive messages from anyone else that is logged into the app.
+
+
+STEPS
+=====
+
+0. Open up /public/index.html (in the browser & sublime) to get an idea of the interface.  Make note of the "users-wrap" sidebar, the "msg-wrap" and the "msg-form".  You'll need to update the "users-wrap" to have the list of current users, add chat messages to the "msg-wrap", and collect input from the "msg-form".
+
+1. Set up an Express server to serve the client-side code (/public).
+
+2. Use the Express server to create a Socket.IO server.  Verify that the clients can connect to it.
+
+3. Registration: server-side logic.  The server keeps track of all connected users.
+    a. When the user loads the app, prompt them for a username.
+    b. Send a "client register user" message to the server.
+    c. Add the new user to a *global* "users" array on the server.
+    d. When the user disconnects, delete the user from the users array.  For this you will need: array.indexOf(...) and array.splice(...)
+
+4. Registration: client-side display.  The client gets a list of the users from the server and needs to display it.
+    a. Anytime a user joins or leaves, *ALL* clients need to be sent the "users" array from the server in a "server user list" message.
+    b. The clients need to listen for the "server user list" message and then update the user-wrap in the DOM.  For this you'll need: element.innerHTML, document.createElement(...) and element.appendChild(...).
+
+3. Messaging
+    a. When the client sends a message:
+        - The client adds their message to their own DOM (think cloning).
+        - The client emits a "client new chat message" message to the server, which contains the username and the contents of the chat message.
+    b. The server should broadcast the message to all other connected clients using a "server new chat message" message.
+    c. The client should listen for "server new chat message" and update their DOM accordingly.
+
+
+BONUSES
+=======
+
+0. ...deploy to Heroku!
+
+1. The chat messages could use a timestamp.  When a message is sent from the client, get the time and send it along.  We want our server to be as flexible as possible, so we want to send the time in a standard format.  Date objects have a method called toISOString which will convert the date and time to a standardized format.
+
+2. The server is just acting as a relay station.  It should store the chat history in a global variable.  When new users join, they should be given the chat history.  Each element in the chat history should be a an object with the username of the client who sent the message, the message contents and the time the message was sent.
+
+3. When a user connects/disconnects, there should be a message in the chat.  The server can emit it's own message (e.g. username is "SERVER", content is "Rex joined the chat", etc.)
